@@ -1,5 +1,5 @@
 # Caddy: HTTPS (automatic certificates), security headers, the React app and Django's static files.
-FROM node:22-alpine AS frontend
+FROM node:26-alpine AS frontend
 WORKDIR /src
 COPY frontend/package.json frontend/package-lock.json ./
 RUN npm ci
