@@ -1,0 +1,270 @@
+metadata:
+  generated: "2026-11-24"
+  source_plan: "plan.md"
+  target_tasks: "plan.md (inline task breakdown)"
+
+summary:
+  total_plan_items: 27
+  covered_plan_items: 27
+  missing_plan_items: 0
+  coverage_percentage: 100.0
+  total_tasks_generated: 88
+  orphan_tasks: 0
+
+phases:
+  - phase_id: "Phase-1"
+    phase_name: "Setup"
+    items:
+      - item_id: "1.1"
+        description: "Initialize the application workspace"
+        tasks: [{task_id: "T001", description: "Create React application"}, {task_id: "T002", description: "Create Django/DRF application"}, {task_id: "T003", description: "Configure PostgreSQL and environment"}, {task_id: "T004", description: "Add local quality commands"}]
+        notes: ""
+      - item_id: "1.2"
+        description: "Establish quality automation"
+        tasks: [{task_id: "T005", description: "Configure CI"}, {task_id: "T006", description: "Add dependency and secret scanning"}]
+        notes: ""
+      - item_id: "1.3"
+        description: "Record financial decisions and future integration discovery"
+        tasks: [{task_id: "T007", description: "Verify provider availability and commercial details"}, {task_id: "T008", description: "Record base currency, FX, and provider decisions"}]
+        notes: "Manual-payment MVP is not blocked by provider verification; live providers are post-MVP."
+  - phase_id: "Phase-2"
+    phase_name: "Foundational capabilities"
+    items:
+      - item_id: "2.1"
+        description: "Organization, branch, and identity foundation"
+        tasks: [{task_id: "T009", description: "Create organization/access models"}, {task_id: "T010", description: "Configure secure session authentication"}, {task_id: "T011", description: "Implement scope and permission helpers"}, {task_id: "T012", description: "Test isolation and role scope"}]
+        notes: ""
+      - item_id: "2.2"
+        description: "Shared business records"
+        tasks: [{task_id: "T013", description: "Create catalog and contact models"}, {task_id: "T014", description: "Create expense and attachment models"}, {task_id: "T015", description: "Add scoped CRUD APIs"}, {task_id: "T016", description: "Implement private uploads"}]
+        notes: ""
+      - item_id: "2.3"
+        description: "Shared API and audit foundations"
+        tasks: [{task_id: "T017", description: "Configure API conventions"}, {task_id: "T018", description: "Create audit event service"}, {task_id: "T019", description: "Implement idempotency handling"}]
+        notes: ""
+      - item_id: "2.4"
+        description: "Responsive application shell"
+        tasks: [{task_id: "T020", description: "Build app shell"}, {task_id: "T021", description: "Build accessible shared components"}, {task_id: "T022", description: "Implement identity and API client"}]
+        notes: ""
+  - phase_id: "Phase-3"
+    phase_name: "US-06 Staff access"
+    items:
+      - item_id: "3.1"
+        description: "Staff and role management"
+        tasks: [{task_id: "T023", description: "Implement staff and role APIs"}, {task_id: "T024", description: "Build staff screens"}, {task_id: "T025", description: "Test roles and deactivation"}]
+        notes: ""
+      - item_id: "3.2"
+        description: "Audit coverage"
+        tasks: [{task_id: "T026", description: "Audit access-control changes"}, {task_id: "T027", description: "Add restricted audit history"}]
+        notes: ""
+  - phase_id: "Phase-4"
+    phase_name: "US-02 Inventory and purchasing"
+    items:
+      - item_id: "4.1"
+        description: "Stock model and movement ledger"
+        tasks: [{task_id: "T028", description: "Create stock models"}, {task_id: "T029", description: "Implement stock/cost services"}, {task_id: "T030", description: "Build inventory screens"}, {task_id: "T031", description: "Test stock invariants"}]
+        notes: ""
+      - item_id: "4.2"
+        description: "Purchases and goods receiving"
+        tasks: [{task_id: "T032", description: "Create purchase/receipt models"}, {task_id: "T033", description: "Implement receipt posting"}, {task_id: "T034", description: "Add purchase APIs and UI"}, {task_id: "T035", description: "Test receipt behavior"}]
+        notes: ""
+      - item_id: "4.3"
+        description: "Low-stock visibility"
+        tasks: [{task_id: "T036", description: "Implement stock alerts"}, {task_id: "T037", description: "Build inventory alert views"}]
+        notes: ""
+  - phase_id: "Phase-5"
+    phase_name: "US-01 Sales and receipts"
+    items:
+      - item_id: "5.1"
+        description: "Transactional sale posting"
+        tasks: [{task_id: "T038", description: "Create sale models"}, {task_id: "T039", description: "Implement transactional posting/reversal"}, {task_id: "T040", description: "Add sale APIs"}, {task_id: "T041", description: "Build checkout UI"}, {task_id: "T042", description: "Test sale concurrency/integrity"}]
+        notes: ""
+      - item_id: "5.2"
+        description: "Receipt generation and sharing"
+        tasks: [{task_id: "T043", description: "Generate protected PDF receipts"}, {task_id: "T044", description: "Add print/download/share actions"}, {task_id: "T045", description: "Test receipt behavior"}]
+        notes: ""
+  - phase_id: "Phase-6"
+    phase_name: "US-03 Balances, payments, and expenses"
+    items:
+      - item_id: "6.1"
+        description: "Customer and supplier payments"
+        tasks: [{task_id: "T046", description: "Create payment models"}, {task_id: "T047", description: "Implement payment allocation"}, {task_id: "T048", description: "Add payment APIs and screens"}, {task_id: "T049", description: "Test payment reconciliation"}]
+        notes: ""
+      - item_id: "6.2"
+        description: "Expense tracking"
+        tasks: [{task_id: "T050", description: "Complete expense APIs and authorization"}, {task_id: "T051", description: "Build expense entry and upload screens"}]
+        notes: ""
+      - item_id: "6.3"
+        description: "Dual-currency transactions and reporting"
+        tasks: [{task_id: "T052", description: "Add currency and FX models"}, {task_id: "T053", description: "Implement conversion and rate APIs"}, {task_id: "T054", description: "Build dual-currency UI"}, {task_id: "T055", description: "Test FX snapshots and reporting"}]
+        notes: ""
+      - item_id: "6.4"
+        description: "Deferred: live payment collection (post-MVP)"
+        tasks: [{task_id: "T056", description: "(Later) Create provider adapter and payment intent"}, {task_id: "T057", description: "(Later) Verify and reconcile provider callbacks"}, {task_id: "T058", description: "(Later) Build payment checkout UI"}, {task_id: "T059", description: "(Later) Test provider sandbox flows"}]
+        notes: "Excluded from MVP scope, cost, and acceptance per owner decision."
+  - phase_id: "Phase-7"
+    phase_name: "US-04 Department orders"
+    items:
+      - item_id: "7.1"
+        description: "Shared and department-specific order records"
+        tasks: [{task_id: "T060", description: "Create order models"}, {task_id: "T061", description: "Implement order validation and rules"}, {task_id: "T062", description: "Add order APIs"}, {task_id: "T063", description: "Build department order forms"}]
+        notes: ""
+      - item_id: "7.2"
+        description: "Order status and delivery workflow"
+        tasks: [{task_id: "T064", description: "Implement status workflow"}, {task_id: "T065", description: "Build order timeline and filters"}, {task_id: "T066", description: "Test status permissions"}]
+        notes: ""
+  - phase_id: "Phase-8"
+    phase_name: "US-05 Dashboard and reports"
+    items:
+      - item_id: "8.1"
+        description: "Dashboard and report calculations"
+        tasks: [{task_id: "T067", description: "Implement dashboard summary"}, {task_id: "T068", description: "Implement report APIs"}, {task_id: "T069", description: "Build dashboard UI"}, {task_id: "T070", description: "Test report reconciliation"}]
+        notes: ""
+      - item_id: "8.2"
+        description: "Report export"
+        tasks: [{task_id: "T071", description: "Implement PDF/spreadsheet exports"}, {task_id: "T072", description: "Build report download UI"}, {task_id: "T073", description: "Test export safety and output"}]
+        notes: ""
+  - phase_id: "Phase-9"
+    phase_name: "US-07 Search and notifications"
+    items:
+      - item_id: "9.1"
+        description: "Global search and filters"
+        tasks: [{task_id: "T074", description: "Implement scoped search"}, {task_id: "T075", description: "Build global search UI"}, {task_id: "T076", description: "Test boundaries and performance"}]
+        notes: ""
+      - item_id: "9.2"
+        description: "In-app alerts"
+        tasks: [{task_id: "T077", description: "Implement in-app alerts"}, {task_id: "T078", description: "Build alert UI"}, {task_id: "T079", description: "Test alerts and permissions"}]
+        notes: ""
+      - item_id: "9.3"
+        description: "Deferred: consent-aware customer messaging (post-MVP)"
+        tasks: [{task_id: "T080", description: "(Later) Implement consent, outbox, and delivery worker"}, {task_id: "T081", description: "(Later) Configure channel adapters and preferences"}, {task_id: "T082", description: "(Later) Test consent, retries, and delivery callbacks"}]
+        notes: "Excluded from MVP scope, cost, and acceptance per owner decision."
+  - phase_id: "Phase-10"
+    phase_name: "Cross-cutting production readiness"
+    items:
+      - item_id: "10.1"
+        description: "Security, recovery, accessibility, and release"
+        tasks: [{task_id: "T083", description: "Configure production security and monitoring"}, {task_id: "T084", description: "Document and test restore"}, {task_id: "T085", description: "Run acceptance and security checks"}, {task_id: "T086", description: "Prepare import and handover"}, {task_id: "T087", description: "Obtain owner acceptance"}]
+        notes: ""
+      - item_id: "10.2"
+        description: "Deferred offline capability"
+        tasks: [{task_id: "T088", description: "Record offline-write prerequisites"}]
+        notes: "Offline writes remain deferred and are not implemented in MVP."
+
+missing_plan_items: []
+orphan_tasks: []
+upstream_trace:
+  - plan_item: "1.1"
+    source_requirements: ["REQ-034"]
+    tasks: ["T001", "T002", "T003", "T004"]
+    full_trace: "REQ-034 → Phase-1.1 → T001,T002,T003,T004"
+  - plan_item: "1.2"
+    source_requirements: ["REQ-031", "REQ-032", "REQ-033", "REQ-034", "REQ-035"]
+    tasks: ["T005", "T006"]
+    full_trace: "REQ-031,REQ-032,REQ-033,REQ-034,REQ-035 → Phase-1.2 → T005,T006"
+  - plan_item: "1.3"
+    source_requirements: ["REQ-030", "REQ-037", "REQ-038"]
+    tasks: ["T007", "T008"]
+    full_trace: "REQ-030,REQ-037,REQ-038 → Phase-1.3 → T007,T008"
+  - plan_item: "2.1"
+    source_requirements: ["REQ-001", "REQ-002", "REQ-031"]
+    tasks: ["T009", "T010", "T011", "T012"]
+    full_trace: "REQ-001,REQ-002,REQ-031 → Phase-2.1 → T009,T010,T011,T012"
+  - plan_item: "2.2"
+    source_requirements: ["REQ-010", "REQ-013", "REQ-019"]
+    tasks: ["T013", "T014", "T015", "T016"]
+    full_trace: "REQ-010,REQ-013,REQ-019 → Phase-2.2 → T013,T014,T015,T016"
+  - plan_item: "2.3"
+    source_requirements: ["REQ-026", "REQ-032", "REQ-035"]
+    tasks: ["T017", "T018", "T019"]
+    full_trace: "REQ-026,REQ-032,REQ-035 → Phase-2.3 → T017,T018,T019"
+  - plan_item: "2.4"
+    source_requirements: ["REQ-034", "REQ-035"]
+    tasks: ["T020", "T021", "T022"]
+    full_trace: "REQ-034,REQ-035 → Phase-2.4 → T020,T021,T022"
+  - plan_item: "3.1"
+    source_requirements: ["REQ-002", "REQ-031"]
+    tasks: ["T023", "T024", "T025"]
+    full_trace: "REQ-002,REQ-031 → Phase-3.1 → T023,T024,T025"
+  - plan_item: "3.2"
+    source_requirements: ["REQ-032"]
+    tasks: ["T026", "T027"]
+    full_trace: "REQ-032 → Phase-3.2 → T026,T027"
+  - plan_item: "4.1"
+    source_requirements: ["REQ-013", "REQ-017", "REQ-018", "REQ-020"]
+    tasks: ["T028", "T029", "T030", "T031"]
+    full_trace: "REQ-013,REQ-017,REQ-018,REQ-020 → Phase-4.1 → T028,T029,T030,T031"
+  - plan_item: "4.2"
+    source_requirements: ["REQ-011", "REQ-015", "REQ-016"]
+    tasks: ["T032", "T033", "T034", "T035"]
+    full_trace: "REQ-011,REQ-015,REQ-016 → Phase-4.2 → T032,T033,T034,T035"
+  - plan_item: "4.3"
+    source_requirements: ["REQ-018", "REQ-027"]
+    tasks: ["T036", "T037"]
+    full_trace: "REQ-018,REQ-027 → Phase-4.3 → T036,T037"
+  - plan_item: "5.1"
+    source_requirements: ["REQ-006", "REQ-007", "REQ-012", "REQ-014"]
+    tasks: ["T038", "T039", "T040", "T041", "T042"]
+    full_trace: "REQ-006,REQ-007,REQ-012,REQ-014 → Phase-5.1 → T038,T039,T040,T041,T042"
+  - plan_item: "5.2"
+    source_requirements: ["REQ-009"]
+    tasks: ["T043", "T044", "T045"]
+    full_trace: "REQ-009 → Phase-5.2 → T043,T044,T045"
+  - plan_item: "6.1"
+    source_requirements: ["REQ-008", "REQ-010", "REQ-011", "REQ-012"]
+    tasks: ["T046", "T047", "T048", "T049"]
+    full_trace: "REQ-008,REQ-010,REQ-011,REQ-012 → Phase-6.1 → T046,T047,T048,T049"
+  - plan_item: "6.2"
+    source_requirements: ["REQ-019"]
+    tasks: ["T050", "T051"]
+    full_trace: "REQ-019 → Phase-6.2 → T050,T051"
+  - plan_item: "6.3"
+    source_requirements: ["REQ-005", "REQ-037"]
+    tasks: ["T052", "T053", "T054", "T055"]
+    full_trace: "REQ-005,REQ-037 → Phase-6.3 → T052,T053,T054,T055"
+  - plan_item: "6.4"
+    source_requirements: ["REQ-038"]
+    tasks: ["T056", "T057", "T058", "T059"]
+    full_trace: "REQ-038 (Later) → Phase-6.4 → T056,T057,T058,T059"
+  - plan_item: "7.1"
+    source_requirements: ["REQ-021", "REQ-022", "REQ-023", "REQ-025"]
+    tasks: ["T060", "T061", "T062", "T063"]
+    full_trace: "REQ-021,REQ-022,REQ-023,REQ-025 → Phase-7.1 → T060,T061,T062,T063"
+  - plan_item: "7.2"
+    source_requirements: ["REQ-024", "REQ-027"]
+    tasks: ["T064", "T065", "T066"]
+    full_trace: "REQ-024,REQ-027 → Phase-7.2 → T064,T065,T066"
+  - plan_item: "8.1"
+    source_requirements: ["REQ-003", "REQ-004", "REQ-005", "REQ-020", "REQ-028"]
+    tasks: ["T067", "T068", "T069", "T070"]
+    full_trace: "REQ-003,REQ-004,REQ-005,REQ-020,REQ-028 → Phase-8.1 → T067,T068,T069,T070"
+  - plan_item: "8.2"
+    source_requirements: ["REQ-029"]
+    tasks: ["T071", "T072", "T073"]
+    full_trace: "REQ-029 → Phase-8.2 → T071,T072,T073"
+  - plan_item: "9.1"
+    source_requirements: ["REQ-026"]
+    tasks: ["T074", "T075", "T076"]
+    full_trace: "REQ-026 → Phase-9.1 → T074,T075,T076"
+  - plan_item: "9.2"
+    source_requirements: ["REQ-027"]
+    tasks: ["T077", "T078", "T079"]
+    full_trace: "REQ-027 → Phase-9.2 → T077,T078,T079"
+  - plan_item: "9.3"
+    source_requirements: ["REQ-030"]
+    tasks: ["T080", "T081", "T082"]
+    full_trace: "REQ-030 → Phase-9.3 → T080,T081,T082"
+  - plan_item: "10.1"
+    source_requirements: ["REQ-031", "REQ-032", "REQ-033", "REQ-034", "REQ-035"]
+    tasks: ["T083", "T084", "T085", "T086", "T087"]
+    full_trace: "REQ-031,REQ-032,REQ-033,REQ-034,REQ-035 → Phase-10.1 → T083,T084,T085,T086,T087"
+  - plan_item: "10.2"
+    source_requirements: ["REQ-036"]
+    tasks: ["T088"]
+    full_trace: "REQ-036 → Phase-10.2 → T088"
+validation:
+  passed: true
+  errors: []
+  warnings:
+    - "Tasks define proposed paths for a greenfield application; adjust only after repository scaffolding is approved."
+    - "Provider-specific payment and messaging tasks are conditional on verified provider availability, merchant onboarding, and owner approval."
