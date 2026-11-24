@@ -63,8 +63,12 @@ class Category(models.Model):
     class Meta:
         ordering = ["name"]
         constraints = [
-            models.UniqueConstraint(fields=["organization", "name"], condition=Q(section__isnull=True), name="uniq_shared_category_name_org"),
-            models.UniqueConstraint(fields=["organization", "section", "name"], condition=Q(section__isnull=False), name="uniq_section_category_name_org"),
+            models.UniqueConstraint(
+                fields=["organization", "name"], condition=Q(section__isnull=True), name="uniq_shared_category_name_org"
+            ),
+            models.UniqueConstraint(
+                fields=["organization", "section", "name"], condition=Q(section__isnull=False), name="uniq_section_category_name_org"
+            ),
         ]
 
     def __str__(self):
@@ -92,6 +96,9 @@ class Product(models.Model):
     selling_price_base = models.DecimalField(max_digits=12, decimal_places=2, default=0, validators=[MinValueValidator(0)])
     minimum_stock = models.DecimalField(max_digits=12, decimal_places=3, default=0, validators=[MinValueValidator(0)])
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.ACTIVE)
+    # Public website: only products staff publish appear there, with their own customer-facing text.
+    show_online = models.BooleanField(default=False)
+    public_description = models.TextField(blank=True, max_length=600)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -102,6 +109,7 @@ class Product(models.Model):
 
     def clean(self):
         from django.core.exceptions import ValidationError
+
         if self.section_id and self.organization_id and self.section.organization_id != self.organization_id:
             raise ValidationError({"section": "Section must belong to the product organization."})
         if self.category_id and self.organization_id and self.category.organization_id != self.organization_id:

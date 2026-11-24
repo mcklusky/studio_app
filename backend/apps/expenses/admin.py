@@ -11,6 +11,6 @@ class ExpenseCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Expense)
 class ExpenseAdmin(admin.ModelAdmin):
-    list_display = ("occurred_at", "category", "amount", "currency", "status", "organization")
+    list_display = ("number", "expense_date", "category", "amount", "currency", "status", "organization")
     list_filter = ("organization", "section", "branch", "currency", "status")
-    date_hierarchy = "occurred_at"
+    date_hierarchy = "expense_date"

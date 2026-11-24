@@ -1,11 +1,12 @@
-from rest_framework.permissions import BasePermission
 from rest_framework.exceptions import NotFound
+from rest_framework.permissions import BasePermission
 
-from apps.identity.scope import has_permission, resolve_membership
+from apps.identity.scope import focus_on_view, has_permission, resolve_membership
 
 
 class HasBusinessPermission(BasePermission):
     """Views must declare permission_code; missing configuration is denied."""
+
     message = "You do not have permission to perform this action."
 
     def has_permission(self, request, view):
@@ -18,5 +19,5 @@ class HasBusinessPermission(BasePermission):
             membership = resolve_membership(request.user, org_id)
         except NotFound:
             return False
-        request.membership = membership
+        request.membership = focus_on_view(membership, request)
         return has_permission(membership, permission_code)

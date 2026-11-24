@@ -1,0 +1,23 @@
+# Backend lint and format settings: `ruff check .` and `ruff format --check .`
+line-length = 140
+target-version = "py313"
+extend-exclude = ["**/migrations/*.py"]
+
+[lint]
+# pyflakes, pycodestyle errors/warnings, import order, bugbear, Django, pyupgrade, security (bandit subset)
+select = ["F", "E", "W", "I", "B", "DJ", "UP", "S"]
+ignore = [
+    "E501",   # long lines: the formatter decides
+    "S101",   # assert is used in tests
+    "S105", "S106",  # test passwords and setting names are not secrets
+    "DJ001",  # nullable CharFields are deliberate where used
+    "DJ008", "DJ012",  # __str__ and member order in models are style, not correctness
+]
+
+[lint.per-file-ignores]
+"**/tests/*.py" = ["S"]
+"**/tests.py" = ["S"]
+"**/tests_*.py" = ["S"]
+
+[lint.isort]
+known-first-party = ["apps", "config"]

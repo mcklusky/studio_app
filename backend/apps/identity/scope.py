@@ -19,27 +19,63 @@ def resolve_membership(user, organization_id=None):
     return membership
 
 
-def allowed_section_ids(membership):
+SAFE_METHODS = ("GET", "HEAD", "OPTIONS")
+
+
+def focus_on_view(membership, request):
+    """Apply the top-bar section/branch selector (X-Section-ID / X-Branch-ID) to reads only.
+
+    The focus can only narrow what the membership already allows: a value outside the
+    person's scope is ignored, never widened. Writes always use the full scope, so a form
+    can still record work for any section the person is allowed.
+    """
+    if request.method in SAFE_METHODS:
+        membership.focus_section = (request.headers.get("X-Section-ID") or "").strip() or None
+        membership.focus_branch = (request.headers.get("X-Branch-ID") or "").strip() or None
+    return membership
+
+
+def _focus(ids, chosen):
+    if chosen:
+        picked = [value for value in ids if str(value) == chosen]
+        if picked:
+            return picked
+    return ids
+
+
+def allowed_section_ids(membership, *, full=False):
+    """Sections the person may see; narrowed to the top-bar focus on reads unless full=True."""
     if not membership.active:
         return []
     if membership.all_sections:
         from apps.organizations.models import BusinessSection
-        return list(BusinessSection.objects.filter(organization_id=membership.organization_id, active=True).values_list("id", flat=True))
-    return list(membership.sections.filter(organization_id=membership.organization_id, active=True).values_list("id", flat=True))
+
+        ids = list(BusinessSection.objects.filter(organization_id=membership.organization_id, active=True).values_list("id", flat=True))
+    else:
+        ids = list(membership.sections.filter(organization_id=membership.organization_id, active=True).values_list("id", flat=True))
+    return ids if full else _focus(ids, getattr(membership, "focus_section", None))
 
 
-def allowed_branch_ids(membership):
+def allowed_branch_ids(membership, *, full=False):
+    """Branches the person may see; narrowed to the top-bar focus on reads unless full=True."""
     if not membership.active:
         return []
     if membership.all_branches:
         from apps.organizations.models import Branch
-        return list(Branch.objects.filter(organization_id=membership.organization_id, active=True).values_list("id", flat=True))
-    return list(membership.branches.filter(organization_id=membership.organization_id, active=True).values_list("id", flat=True))
+
+        ids = list(Branch.objects.filter(organization_id=membership.organization_id, active=True).values_list("id", flat=True))
+    else:
+        ids = list(membership.branches.filter(organization_id=membership.organization_id, active=True).values_list("id", flat=True))
+    return ids if full else _focus(ids, getattr(membership, "focus_branch", None))
 
 
 def has_permission(membership, permission_code):
-    return bool(membership and membership.active and membership.role.organization_id == membership.organization_id
-                and membership.role.permissions.filter(code=permission_code).exists())
+    return bool(
+        membership
+        and membership.active
+        and membership.role.organization_id == membership.organization_id
+        and membership.role.permissions.filter(code=permission_code).exists()
+    )
 
 
 def require_permission(membership, permission_code):
@@ -61,5 +97,9 @@ def scope_queryset(queryset, membership, *, section_field="section_id", branch_f
         queryset = queryset.filter(**{section_field + "__in": allowed_sections}) if allowed_sections else queryset.none()
     if branch_name in model_fields:
         allowed_branches = allowed_branch_ids(membership)
-        queryset = queryset.filter(Q(**{branch_field: None}) | Q(**{branch_field + "__in": allowed_branches})) if allowed_branches else queryset.filter(**{branch_field: None})
+        queryset = (
+            queryset.filter(Q(**{branch_field: None}) | Q(**{branch_field + "__in": allowed_branches}))
+            if allowed_branches
+            else queryset.filter(**{branch_field: None})
+        )
     return queryset

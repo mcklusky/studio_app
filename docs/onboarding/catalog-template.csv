@@ -1,0 +1,6 @@
+section,name,kind,category,sku,size,color,selling_price,buying_price,minimum_stock,opening_quantity,opening_unit_cost
+Clothing,Just Smile Tee,product,T-shirts,JST,M,Black,12.00,5.00,5,20,5.00
+Clothing,Just Smile Tee,product,T-shirts,,L,Black,12.00,5.00,5,15,5.00
+Clothing,Plain cap,product,Caps,CAP-01,,,6.00,2.50,3,10,
+Printing,A4 colour print,service,Printing,,,,0.50,,,,
+Photography,Passport photos (4),service,Photos,,,,3.00,,,,

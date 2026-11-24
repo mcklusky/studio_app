@@ -1,0 +1,232 @@
+/* Loading skeleton */
+.skeleton-panel {
+  padding-bottom: 4px;
+}
+.skeleton-head,
+.skeleton-row {
+  align-items: center;
+  padding: 0 16px;
+}
+.skeleton-head {
+  display: flex;
+  gap: 40px;
+  height: 40px;
+  border-bottom: 1px solid var(--line);
+  background: #fcf9f8;
+}
+.skeleton-row {
+  display: flex;
+  gap: 32px;
+  height: 61px;
+  border-bottom: 1px solid #f2f1f0;
+}
+.skeleton-row:last-child {
+  border-bottom: 0;
+}
+.skeleton-row > * {
+  flex: 1;
+}
+.skeleton-row > .skeleton-stack {
+  flex: 2;
+  display: grid;
+  gap: 7px;
+}
+.skeleton-row > .skeleton-pill {
+  flex: 0 0 96px;
+}
+.skeleton-bar {
+  display: block;
+  height: 11px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #f3ebe1 0%, #f6f3f1 40%, #f3ebe1 80%) 0 0 / 300% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+.skeleton-bar-head {
+  height: 9px;
+  flex: 0 0 auto;
+}
+.skeleton-bar-sub {
+  height: 8px;
+  opacity: 0.7;
+}
+.skeleton-pill {
+  height: 26px;
+  border-radius: 8px;
+}
+@keyframes skeleton-shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+/* Empty state */
+.empty-state {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  text-align: center;
+  padding: 44px 20px;
+  background: #fff;
+  border: 1px dashed #dcdac8;
+  border-radius: 14px;
+}
+.empty-state h3 {
+  margin: 6px 0 0;
+  font-size: 16px;
+  color: var(--ink);
+}
+.empty-state p {
+  margin: 0;
+  max-width: 380px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.empty-state .button {
+  margin-top: 10px;
+}
+.empty-icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: var(--brand-yellow-soft);
+  color: var(--brand-olive);
+  box-shadow: inset 0 0 0 1px #fcdc8b;
+}
+
+/* Status badge with icon */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 9px 3px 7px;
+  border-radius: 99px;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+.status-badge svg {
+  flex-shrink: 0;
+}
+.status-ok {
+  background: #ecfdf3;
+  color: #067647;
+}
+.status-low {
+  background: #fffaeb;
+  color: #b54708;
+}
+.status-out {
+  background: #fef3f2;
+  color: #b42318;
+}
+.status-muted {
+  background: #f2f1f0;
+  color: #6a5d57;
+}
+.status-info {
+  background: #fdf1ea;
+  color: #a74d20;
+}
+
+/* Toast */
+.toast-card {
+  position: fixed;
+  right: 24px;
+  bottom: 22px;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: min(440px, calc(100% - 32px));
+  padding: 12px 12px 12px 14px;
+  border-radius: 14px;
+  background: var(--brand-ink);
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.4;
+  box-shadow: 0 14px 36px #05040440;
+  overflow: hidden;
+  animation: toast-in 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+}
+.toast-icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--brand-yellow);
+  color: var(--brand-ink);
+}
+.toast-card.is-error .toast-icon {
+  background: #fda29b;
+  color: #7a271a;
+}
+.toast-text {
+  flex: 1;
+}
+.toast-close {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #d9c3ad;
+  cursor: pointer;
+}
+.toast-close:hover {
+  background: #ffffff1a;
+  color: #fff;
+}
+.toast-close:focus-visible {
+  outline: 2px solid var(--brand-yellow);
+}
+.toast-timer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+  background: var(--brand-yellow);
+  transform-origin: left;
+  animation: toast-timer 4s linear forwards;
+}
+.toast-card.is-error .toast-timer {
+  background: #f97066;
+}
+@keyframes toast-timer {
+  to {
+    transform: scaleX(0);
+  }
+}
+@media (max-width: 540px) {
+  .toast-card {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    max-width: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-bar,
+  .toast-card,
+  .toast-timer {
+    animation: none;
+  }
+}

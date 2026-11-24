@@ -1,0 +1,177 @@
+.staff-person {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.staff-avatar {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--brand-yellow-soft);
+  color: var(--brand-deep);
+  font-weight: 800;
+  font-size: 12px;
+}
+.role-pill {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 700;
+  background: #f2f1f0;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.role-owner-admin {
+  background: var(--brand-ink);
+  color: var(--brand-yellow);
+}
+.role-manager {
+  background: var(--brand-yellow-soft);
+  color: var(--brand-deep);
+}
+
+.scope-box {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 14px 10px;
+  margin: 0 0 14px;
+  min-width: 0;
+}
+.scope-box legend {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 0 6px;
+}
+.scope-box.has-error {
+  border-color: #f04438;
+}
+.scope-box .checkbox {
+  margin: 6px 0;
+}
+.scope-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  padding-left: 4px;
+}
+.role-summary {
+  margin: -6px 0 12px;
+}
+.warn-hint {
+  color: #b54708;
+}
+.credentials {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 8px;
+  padding: 14px;
+  border-radius: 10px;
+  background: var(--brand-yellow-soft);
+}
+.credentials dt {
+  font-size: 12px;
+  color: var(--muted);
+}
+.credentials dd {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+.mono {
+  font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  letter-spacing: 0.04em;
+}
+
+.roles-toolbar {
+  justify-content: space-between;
+  align-items: center;
+}
+.roles-toolbar .field-hint {
+  margin: 0;
+}
+.role-matrix-wrap {
+  overflow-x: auto;
+}
+.role-matrix {
+  min-width: 640px;
+}
+.role-matrix .role-col {
+  text-align: center;
+  white-space: nowrap;
+}
+.role-matrix thead .role-col {
+  vertical-align: bottom;
+}
+.role-matrix tbody th[scope='row'] {
+  background: transparent;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 500;
+  text-align: left;
+  padding: 8px 16px;
+  border-bottom: 1px solid #f2f1f0;
+}
+.matrix-group th {
+  background: #fdfcfb;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  padding: 10px 16px;
+}
+.tick {
+  color: #067647;
+  font-weight: 800;
+}
+.no {
+  color: #d0c9c6;
+}
+.role-edit {
+  display: block;
+  margin: 4px auto 0;
+  min-height: 30px;
+}
+.permission-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 14px;
+}
+
+.audit-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.audit-list li {
+  display: flex;
+  gap: 16px;
+  padding: 11px 16px;
+  border-bottom: 1px solid #f2f1f0;
+  font-size: 14px;
+}
+.audit-when {
+  flex: none;
+  width: 150px;
+  color: var(--muted);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.audit-what {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 540px) {
+  .permission-groups {
+    grid-template-columns: 1fr;
+  }
+  .audit-list li {
+    flex-direction: column;
+    gap: 2px;
+  }
+}

@@ -53,7 +53,7 @@ Tasks:
 - [x] T001 [Plan:1.1] Create `frontend/` React + TypeScript application scaffold with production build and development scripts.
 - [x] T002 [P] [Plan:1.1] Create `backend/` Django project and DRF application scaffold with environment-specific settings.
 - [x] T003 [P] [Plan:1.1] Add local PostgreSQL configuration and `.env.example` without credentials in `backend/` and root configuration.
-- [ ] T004 [Plan:1.1] Add lint, format, type-check, test, and build commands for `frontend/` and `backend/`.
+- [x] T004 [Plan:1.1] Add lint, format, type-check, test, and build commands for `frontend/` and `backend/`. *(Done: backend `ruff check` / `ruff format` (`backend/ruff.toml`, `requirements-dev.txt`); frontend `npm run lint | format:check | typecheck | build`, all in one `npm run check`. Commands in README → Checks.)*
 
 #### Step 1.2 — Establish quality automation
 - **Requirements:** REQ-031–REQ-035
@@ -62,8 +62,8 @@ Tasks:
 
 Tasks:
 
-- [ ] T005 [Plan:1.2] Configure CI to run frontend checks, backend checks, database-backed tests, and production builds.
-- [ ] T006 [Plan:1.2] Add dependency and secret scanning jobs and document environment-variable requirements in `README.md`.
+- [x] T005 [Plan:1.2] Configure CI to run frontend checks, backend checks, database-backed tests, and production builds. *(Done: `.github/workflows/ci.yml` runs backend lint, format, system, migration and `check --deploy` checks; tests on PostgreSQL 17; the frontend `npm run check`; then builds both production images. Workflows pass actionlint.)*
+- [x] T006 [Plan:1.2] Add dependency and secret scanning jobs and document environment-variable requirements in `README.md`. *(Done: `.github/workflows/security.yml` runs pip-audit, npm audit and a gitleaks full-history scan on every push and weekly; Dependabot is in `.github/dependabot.yml`; README lists every environment variable. The first audit found advisories in Pillow 12.3 and DRF 3.16, now upgraded to Pillow 13.0 and DRF 3.18.)*
 
 #### Step 1.3 — Record financial decisions and future integration discovery
 - **Requirements:** REQ-037 (MVP); REQ-030 and REQ-038 (Later)
@@ -85,9 +85,9 @@ Tasks:
 Tasks:
 
 - [x] T009 [Plan:2.1] Create organization, business-section, branch, membership, role, and permission models and migrations in `backend/apps/organizations/` and `backend/apps/identity/`.
-- [ ] T010 [P] [Plan:2.1] Configure secure session authentication, CSRF, password reset hooks, and login throttling in `backend/config/`.
+- [x] T010 [P] [Plan:2.1] Configure secure session authentication, CSRF, password reset hooks, and login throttling in `backend/config/`.
 - [x] T011 [Plan:2.1] Implement organization/section/branch scoping helpers and default-deny permission checks in `backend/apps/identity/`.
-- [ ] T012 [Plan:2.1] Add organization-isolation and role-scope tests in `backend/apps/identity/tests/`.
+- [x] T012 [Plan:2.1] Add organization-isolation and role-scope tests in `backend/apps/identity/tests/`.
 
 #### Step 2.2 — Shared business records
 - **Requirements:** REQ-010, REQ-013, REQ-019
@@ -96,10 +96,10 @@ Tasks:
 
 Tasks:
 
-- [ ] T013 [Plan:2.2] Create customer, supplier, product, product-variant, and category models with organization-scoped constraints in `backend/apps/catalog/`.
-- [ ] T014 [P] [Plan:2.2] Create expense-category, expense, and attachment metadata models in `backend/apps/expenses/` and `backend/apps/files/`.
-- [ ] T015 [Plan:2.2] Add customer/supplier/product/expense serializers, scoped querysets, and CRUD APIs in `backend/apps/catalog/api/` and `backend/apps/expenses/api/`.
-- [ ] T016 [Plan:2.2] Implement private upload validation, storage adapter, and authorized downloads in `backend/apps/files/`.
+- [x] T013 [Plan:2.2] Create customer, supplier, product, product-variant, and category models with organization-scoped constraints in `backend/apps/catalog/`.
+- [x] T014 [P] [Plan:2.2] Create expense-category, expense, and attachment metadata models in `backend/apps/expenses/` and `backend/apps/files/`.
+- [x] T015 [Plan:2.2] Add customer/supplier/product/expense serializers, scoped querysets, and CRUD APIs in `backend/apps/catalog/api/` and `backend/apps/expenses/api/`.
+- [x] T016 [Plan:2.2] Implement private upload validation, storage adapter, and authorized downloads in `backend/apps/files/`.
 
 #### Step 2.3 — Shared API and audit foundations
 - **Requirements:** REQ-026, REQ-032, REQ-035
@@ -108,9 +108,9 @@ Tasks:
 
 Tasks:
 
-- [ ] T017 [Plan:2.3] Configure `/api/v1/` routing, pagination, filtering, validation-error envelope, and request correlation in `backend/config/api.py`.
-- [ ] T018 [Plan:2.3] Create append-only audit event model and domain service in `backend/apps/audit/`.
-- [ ] T019 [Plan:2.3] Add reusable idempotency-key persistence and conflict handling for financial operations in `backend/apps/common/idempotency.py`.
+- [x] T017 [Plan:2.3] Configure `/api/v1/` routing, pagination, filtering, validation-error envelope, and request correlation in `backend/config/api.py`.
+- [x] T018 [Plan:2.3] Create append-only audit event model and domain service in `backend/apps/audit/`.
+- [x] T019 [Plan:2.3] Add reusable idempotency-key persistence and conflict handling for financial operations in `backend/apps/common/idempotency.py`.
 
 #### Step 2.4 — Responsive application shell
 - **Requirements:** REQ-034, REQ-035
@@ -119,9 +119,9 @@ Tasks:
 
 Tasks:
 
-- [ ] T020 [Plan:2.4] Build responsive app shell, permission-aware navigation, and section/branch selector in `frontend/src/app/`.
-- [ ] T021 [P] [Plan:2.4] Create accessible form, table, dialog, status badge, date filter, and error components in `frontend/src/components/`.
-- [ ] T022 [Plan:2.4] Add authentication, current-user, organization-context, and API error handling in `frontend/src/features/identity/`.
+- [x] T020 [Plan:2.4] Build responsive app shell, permission-aware navigation, and section/branch selector in `frontend/src/app/`. *(Done: the top-bar section/branch selector (`app/FocusSelector.tsx`) narrows reads through `X-Section-ID` / `X-Branch-ID` (`focus_on_view` in `apps/identity/scope.py`). It can never widen scope, writes ignore it, and the choice is remembered per organization. Alerts stay unfiltered. Hidden on phones ≤540px.)*
+- [x] T021 [P] [Plan:2.4] Create accessible form, table, dialog, status badge, date filter, and error components in `frontend/src/components/`. *(Done: `components/DateRangeFilter.tsx` (any date, today, week, month, year, custom) on the Sales and Purchases lists; shared date helpers in `lib/dates.ts`, also used by Reports.)*
+- [x] T022 [Plan:2.4] Add authentication, current-user, organization-context, and API error handling in `frontend/src/features/identity/`.
 
 ### Phase 3 — US-06: Staff access and accountability (P1)
 
@@ -132,9 +132,9 @@ Tasks:
 
 Tasks:
 
-- [ ] T023 [US6] [Plan:3.1] Implement staff list, invite/create, role assignment, section/branch scope, and deactivation APIs in `backend/apps/identity/`.
-- [ ] T024 [US6] [Plan:3.1] Build staff and role administration screens in `frontend/src/features/staff/`.
-- [ ] T025 [US6] [Plan:3.1] Add API and UI tests for role changes, deactivated users, and denied actions in `backend/apps/identity/tests/` and `frontend/src/features/staff/`.
+- [x] T023 [US6] [Plan:3.1] Implement staff list, invite/create, role assignment, section/branch scope, and deactivation APIs in `backend/apps/identity/`.
+- [x] T024 [US6] [Plan:3.1] Build staff and role administration screens in `frontend/src/features/staff/`.
+- [x] T025 [US6] [Plan:3.1] Add API and UI tests for role changes, deactivated users, and denied actions in `backend/apps/identity/tests/` and `frontend/src/features/staff/`. (Backend API tests done; the frontend has no automated UI tests yet. Screens were checked by hand.)
 
 #### Step 3.2 — Audit coverage
 - **Requirements:** REQ-032
@@ -143,8 +143,8 @@ Tasks:
 
 Tasks:
 
-- [ ] T026 [US6] [Plan:3.2] Add audit service calls for account, role, permission, and organization setting changes in `backend/apps/identity/`.
-- [ ] T027 [US6] [Plan:3.2] Add permission-restricted audit search API and activity-history view in `backend/apps/audit/` and `frontend/src/features/audit/`.
+- [x] T026 [US6] [Plan:3.2] Add audit service calls for account, role, permission, and organization setting changes in `backend/apps/identity/`.
+- [x] T027 [US6] [Plan:3.2] Add permission-restricted audit search API and activity-history view in `backend/apps/audit/` and `frontend/src/features/audit/`.
 
 ### Phase 4 — US-02: Inventory and purchasing (P1)
 
@@ -155,10 +155,10 @@ Tasks:
 
 Tasks:
 
-- [ ] T028 [US2] [Plan:4.1] Create stock balance, stock movement, and adjustment models with database constraints in `backend/apps/inventory/`.
-- [ ] T029 [US2] [Plan:4.1] Implement locked stock update, movement reconciliation, adjustment authorization, and weighted-average-cost services in `backend/apps/inventory/services/`.
-- [ ] T030 [US2] [Plan:4.1] Build product inventory, movement history, and adjustment screens in `frontend/src/features/inventory/`.
-- [ ] T031 [US2] [Plan:4.1] Add tests for movement reconciliation, adjustment reasons, thresholds, and concurrent stock updates in `backend/apps/inventory/tests/`.
+- [x] T028 [US2] [Plan:4.1] Create stock balance, stock movement, and adjustment models with database constraints in `backend/apps/inventory/`.
+- [x] T029 [US2] [Plan:4.1] Implement locked stock update, movement reconciliation, adjustment authorization, and weighted-average-cost services in `backend/apps/inventory/services/`.
+- [x] T030 [US2] [Plan:4.1] Build product inventory, movement history, and adjustment screens in `frontend/src/features/inventory/`.
+- [x] T031 [US2] [Plan:4.1] Add tests for movement reconciliation, adjustment reasons, thresholds, and concurrent stock updates in `backend/apps/inventory/tests/`. *(Done: `test_concurrency.py` runs simultaneous requests on PostgreSQL. The last unit sells once, a balance can't be paid twice, and receipt numbers stay unique. These tests skip on SQLite.)*
 
 #### Step 4.2 — Purchases and goods receiving
 - **Requirements:** REQ-011, REQ-015, REQ-016
@@ -167,10 +167,10 @@ Tasks:
 
 Tasks:
 
-- [ ] T032 [US2] [Plan:4.2] Create purchase, purchase-line, goods-receipt, and receipt-line models in `backend/apps/purchasing/`.
-- [ ] T033 [US2] [Plan:4.2] Implement idempotent receipt posting, stock movements, cost allocation, supplier balance services, and audited purchase reversals in `backend/apps/purchasing/services/`.
-- [ ] T034 [US2] [Plan:4.2] Add purchase create/detail/receive APIs and forms in `backend/apps/purchasing/api/` and `frontend/src/features/purchasing/`.
-- [ ] T035 [US2] [Plan:4.2] Test partial receipt, duplicate request, invalid quantity, and rollback behavior in `backend/apps/purchasing/tests/`.
+- [x] T032 [US2] [Plan:4.2] Create purchase, purchase-line, goods-receipt, and receipt-line models in `backend/apps/purchasing/`.
+- [x] T033 [US2] [Plan:4.2] Implement idempotent receipt posting, stock movements, cost allocation, supplier balance services, and audited purchase reversals in `backend/apps/purchasing/services/`.
+- [x] T034 [US2] [Plan:4.2] Add purchase create/detail/receive APIs and forms in `backend/apps/purchasing/api/` and `frontend/src/features/purchasing/`.
+- [x] T035 [US2] [Plan:4.2] Test partial receipt, duplicate request, invalid quantity, and rollback behavior in `backend/apps/purchasing/tests/`.
 
 #### Step 4.3 — Low-stock visibility
 - **Requirements:** REQ-018, REQ-027
@@ -179,8 +179,8 @@ Tasks:
 
 Tasks:
 
-- [ ] T036 [US2] [Plan:4.3] Implement low-stock/out-of-stock queries and inventory alert generation in `backend/apps/notifications/`.
-- [ ] T037 [US2] [Plan:4.3] Build low-stock product views and alert links in `frontend/src/features/inventory/` and `frontend/src/features/notifications/`.
+- [x] T036 [US2] [Plan:4.3] Implement low-stock/out-of-stock queries and inventory alert generation in `backend/apps/notifications/`. *(Done in Phase 9: `stock_out` / `stock_low` alerts in `apps/notifications/services.py`.)*
+- [x] T037 [US2] [Plan:4.3] Build low-stock product views and alert links in `frontend/src/features/inventory/` and `frontend/src/features/notifications/`. *(Done: low/out-of-stock views, and alerts that open Inventory filtered to the item.)*
 
 ### Phase 5 — US-01: Sales and receipts (P1)
 
@@ -191,11 +191,11 @@ Tasks:
 
 Tasks:
 
-- [ ] T038 [US1] [Plan:5.1] Create sale and sale-line models with immutable price/cost snapshots in `backend/apps/sales/`.
-- [ ] T039 [US1] [Plan:5.1] Implement decimal-safe totals, permission checks, stock locking, atomic posting, and reasoned reversal services in `backend/apps/sales/services/`.
-- [ ] T040 [US1] [Plan:5.1] Add sale preview/create-and-post/list/detail/reverse APIs with idempotency handling in `backend/apps/sales/api/`.
-- [ ] T041 [US1] [Plan:5.1] Build cashier checkout, review, payment entry, and sale-detail screens in `frontend/src/features/sales/`.
-- [ ] T042 [US1] [Plan:5.1] Test concurrent checkout, out-of-stock rejection, rollback, totals, and reversal behavior in `backend/apps/sales/tests/`.
+- [x] T038 [US1] [Plan:5.1] Create sale and sale-line models with immutable price/cost snapshots in `backend/apps/sales/`.
+- [x] T039 [US1] [Plan:5.1] Implement decimal-safe totals, permission checks, stock locking, atomic posting, and reasoned reversal services in `backend/apps/sales/services/`.
+- [x] T040 [US1] [Plan:5.1] Add sale preview/create-and-post/list/detail/reverse APIs with idempotency handling in `backend/apps/sales/api/`.
+- [x] T041 [US1] [Plan:5.1] Build cashier checkout, review, payment entry, and sale-detail screens in `frontend/src/features/sales/`.
+- [x] T042 [US1] [Plan:5.1] Test concurrent checkout, out-of-stock rejection, rollback, totals, and reversal behavior in `backend/apps/sales/tests/`.
 
 #### Step 5.2 — Receipt generation and sharing
 - **Requirements:** REQ-009
@@ -204,9 +204,9 @@ Tasks:
 
 Tasks:
 
-- [ ] T043 [US1] [Plan:5.2] Implement receipt rendering and authorized PDF response in `backend/apps/sales/receipts/`.
-- [ ] T044 [US1] [Plan:5.2] Add print, download, and device-share receipt actions in `frontend/src/features/sales/`.
-- [ ] T045 [US1] [Plan:5.2] Test receipt totals, permissions, and private access in `backend/apps/sales/tests/`.
+- [x] T043 [US1] [Plan:5.2] Implement receipt rendering and authorized PDF response in `backend/apps/sales/receipts/`. *(Done: `apps/sales/receipts.py` renders a 76 mm PDF from the same data as the screen. `GET /api/v1/sales/{id}/receipt/` needs `sales.view` and the sale's section/branch scope, is audited, and is never cached. Costs never appear.)*
+- [x] T044 [US1] [Plan:5.2] Add print, download, and device-share receipt actions in `frontend/src/features/sales/`. *(Done: Print, Download PDF and Share; Share uses the device share sheet, or copies to the clipboard where there isn't one.)*
+- [x] T045 [US1] [Plan:5.2] Test receipt totals, permissions, and private access in `backend/apps/sales/tests/`. *(Done: `apps/sales/tests/test_receipts.py` checks totals, payments and change, the VOID mark on reversed sales, that costs never appear, scope and organization isolation, and the audit record.)*
 
 ### Phase 6 — US-03: Balances, payments, and expenses (P1)
 
@@ -217,10 +217,10 @@ Tasks:
 
 Tasks:
 
-- [ ] T046 [US3] [Plan:6.1] Create customer/supplier payment and allocation models with database constraints in `backend/apps/payments/`.
-- [ ] T047 [US3] [Plan:6.1] Implement payment allocation, balance calculation, overpayment handling, and reversal services in `backend/apps/payments/services/`.
-- [ ] T048 [US3] [Plan:6.1] Add customer/supplier payment APIs and history screens in `backend/apps/payments/api/` and `frontend/src/features/payments/`.
-- [ ] T049 [US3] [Plan:6.1] Test partial payments, multi-allocation, overpayment, reversals, and balance reconciliation in `backend/apps/payments/tests/`.
+- [x] T046 [US3] [Plan:6.1] Create customer/supplier payment and allocation models with database constraints in `backend/apps/payments/`.
+- [x] T047 [US3] [Plan:6.1] Implement payment allocation, balance calculation, overpayment handling, and reversal services in `backend/apps/payments/services/`.
+- [x] T048 [US3] [Plan:6.1] Add customer/supplier payment APIs and history screens in `backend/apps/payments/api/` and `frontend/src/features/payments/`.
+- [x] T049 [US3] [Plan:6.1] Test partial payments, multi-allocation, overpayment, reversals, and balance reconciliation in `backend/apps/payments/tests/`.
 
 #### Step 6.2 — Expense tracking
 - **Requirements:** REQ-019
@@ -229,8 +229,8 @@ Tasks:
 
 Tasks:
 
-- [ ] T050 [US3] [Plan:6.2] Implement expense validation, audit, list/filter APIs, attachment authorization, and posted-expense reversals in `backend/apps/expenses/`.
-- [ ] T051 [US3] [Plan:6.2] Build expense entry, category selection, and receipt/photo upload screens in `frontend/src/features/expenses/`.
+- [x] T050 [US3] [Plan:6.2] Implement expense validation, audit, list/filter APIs, attachment authorization, and posted-expense reversals in `backend/apps/expenses/`.
+- [x] T051 [US3] [Plan:6.2] Build expense entry, category selection, and receipt/photo upload screens in `frontend/src/features/expenses/`.
 
 #### Step 6.3 — Dual-currency transactions and reporting
 - **Requirements:** REQ-005, REQ-037
@@ -239,10 +239,10 @@ Tasks:
 
 Tasks:
 
-- [ ] T052 [US3] [Plan:6.3] Add currency, exchange-rate, FX snapshot, and base-amount fields/constraints to financial models and migrations in `backend/apps/currencies/`.
-- [ ] T053 [US3] [Plan:6.3] Implement approved rate lookup, conversion, rate administration APIs, and historical snapshot rules in `backend/apps/currencies/services/`.
-- [ ] T054 [US3] [Plan:6.3] Add transaction-currency selection and original/base value display to checkout, payment, order, and report screens in `frontend/src/features/`.
-- [ ] T055 [US3] [Plan:6.3] Test concurrent LRD/USD transactions, rate rounding, historical snapshots, separate subtotals, and consolidated USD reports in `backend/apps/currencies/tests/`.
+- [x] T052 [US3] [Plan:6.3] Add currency, exchange-rate, FX snapshot, and base-amount fields/constraints to financial models and migrations in `backend/apps/currencies/`. *(Done: FX snapshot and base amounts on sales, payments, orders, purchases and expenses.)*
+- [x] T053 [US3] [Plan:6.3] Implement approved rate lookup, conversion, rate administration APIs, and historical snapshot rules in `backend/apps/currencies/services/`. *(Done: all transactions, expenses included, use `snapshot_for`.)*
+- [x] T054 [US3] [Plan:6.3] Add transaction-currency selection and original/base value display to checkout, payment, order, and report screens in `frontend/src/features/`. *(Done: currency choice at checkout, on payments and orders, and the USD/LRD display switch.)*
+- [x] T055 [US3] [Plan:6.3] Test concurrent LRD/USD transactions, rate rounding, historical snapshots, separate subtotals, and consolidated USD reports in `backend/apps/currencies/tests/`. *(Done: `apps/currencies/tests/test_currencies.py` covers rounding, date lookup, append-only rates, API permissions, and same-day LRD/USD sales that keep their own snapshot in the report subtotals.)*
 
 #### Step 6.4 — Deferred: live payment collection (post-MVP)
 - **Requirements:** REQ-038 (Later); MVP manual payment recording is covered by Step 6.1
@@ -265,10 +265,10 @@ Tasks:
 
 Tasks:
 
-- [ ] T060 [US4] [Plan:7.1] Create custom order and photography/printing/clothing detail models in `backend/apps/orders/`.
-- [ ] T061 [US4] [Plan:7.1] Implement department-specific validation, due-date queries, payment balance integration, and stock-link rules in `backend/apps/orders/services/`.
-- [ ] T062 [US4] [Plan:7.1] Add create/list/detail APIs for each department order type in `backend/apps/orders/api/`.
-- [ ] T063 [US4] [Plan:7.1] Build photography booking, printing job, and clothing custom-order forms in `frontend/src/features/orders/`.
+- [x] T060 [US4] [Plan:7.1] Create custom order and photography/printing/clothing detail models in `backend/apps/orders/`.
+- [x] T061 [US4] [Plan:7.1] Implement department-specific validation, due-date queries, payment balance integration, and stock-link rules in `backend/apps/orders/services/`.
+- [x] T062 [US4] [Plan:7.1] Add create/list/detail APIs for each department order type in `backend/apps/orders/api/`.
+- [x] T063 [US4] [Plan:7.1] Build photography booking, printing job, and clothing custom-order forms in `frontend/src/features/orders/`.
 
 #### Step 7.2 — Order status and delivery workflow
 - **Requirements:** REQ-024, REQ-027
@@ -277,9 +277,9 @@ Tasks:
 
 Tasks:
 
-- [ ] T064 [US4] [Plan:7.2] Implement allowed order transitions, actor history, and due-date alerts in `backend/apps/orders/services/`.
-- [ ] T065 [US4] [Plan:7.2] Add status timeline, delivery actions, and due/pending filters in `frontend/src/features/orders/`.
-- [ ] T066 [US4] [Plan:7.2] Test invalid transitions, unauthorized status changes, and order audit history in `backend/apps/orders/tests/`.
+- [x] T064 [US4] [Plan:7.2] Implement allowed order transitions, actor history, and due-date alerts in `backend/apps/orders/services/`. (Due-soon/overdue counts and filters are done; pushed in-app alerts are part of T077–T079.)
+- [x] T065 [US4] [Plan:7.2] Add status timeline, delivery actions, and due/pending filters in `frontend/src/features/orders/`.
+- [x] T066 [US4] [Plan:7.2] Test invalid transitions, unauthorized status changes, and order audit history in `backend/apps/orders/tests/`.
 
 ### Phase 8 — US-05: Dashboard and financial reports (P1)
 
@@ -290,10 +290,10 @@ Tasks:
 
 Tasks:
 
-- [ ] T067 [US5] [Plan:8.1] Implement financial aggregation/query services and dashboard summary API in `backend/apps/reports/`.
-- [ ] T068 [US5] [Plan:8.1] Implement sales, expenses, purchases, profit, best-seller, best-customer, stock-value, and debt report endpoints in `backend/apps/reports/`.
-- [ ] T069 [US5] [Plan:8.1] Build dashboard KPI cards, filters, recent activity, and drill-through links in `frontend/src/features/dashboard/`.
-- [ ] T070 [US5] [Plan:8.1] Add reconciliation tests for date/section/branch filters, balances, stock valuation, and combined totals in `backend/apps/reports/tests/`.
+- [x] T067 [US5] [Plan:8.1] Implement financial aggregation/query services and dashboard summary API in `backend/apps/reports/`.
+- [x] T068 [US5] [Plan:8.1] Implement sales, expenses, purchases, profit, best-seller, best-customer, stock-value, and debt report endpoints in `backend/apps/reports/`.
+- [x] T069 [US5] [Plan:8.1] Build dashboard KPI cards, filters, recent activity, and drill-through links in `frontend/src/features/dashboard/`.
+- [x] T070 [US5] [Plan:8.1] Add reconciliation tests for date/section/branch filters, balances, stock valuation, and combined totals in `backend/apps/reports/tests/`.
 
 #### Step 8.2 — Report export
 - **Requirements:** REQ-029
@@ -302,9 +302,9 @@ Tasks:
 
 Tasks:
 
-- [ ] T071 [US5] [Plan:8.2] Implement bounded PDF and spreadsheet export services with safe cell encoding in `backend/apps/reports/exports/`.
-- [ ] T072 [US5] [Plan:8.2] Add report export controls, generation state, and download handling in `frontend/src/features/reports/`.
-- [ ] T073 [US5] [Plan:8.2] Test export scope, filters, formula-like values, private access, and output contents in `backend/apps/reports/tests/`.
+- [x] T071 [US5] [Plan:8.2] Implement bounded PDF and spreadsheet export services with safe cell encoding in `backend/apps/reports/exports/`.
+- [x] T072 [US5] [Plan:8.2] Add report export controls, generation state, and download handling in `frontend/src/features/reports/`.
+- [x] T073 [US5] [Plan:8.2] Test export scope, filters, formula-like values, private access, and output contents in `backend/apps/reports/tests/`.
 
 ### Phase 9 — US-07: Search and notifications (P2)
 
@@ -315,9 +315,9 @@ Tasks:
 
 Tasks:
 
-- [ ] T074 [US7] [Plan:9.1] Implement indexed search/filter endpoints with allowlisted fields in `backend/apps/search/`.
-- [ ] T075 [US7] [Plan:9.1] Build global search, result grouping, and list filters in `frontend/src/features/search/`.
-- [ ] T076 [US7] [Plan:9.1] Test organization/section/branch boundaries and search response performance in `backend/apps/search/tests/`.
+- [x] T074 [US7] [Plan:9.1] Implement indexed search/filter endpoints with allowlisted fields in `backend/apps/search/`.
+- [x] T075 [US7] [Plan:9.1] Build global search, result grouping, and list filters in `frontend/src/features/search/`.
+- [x] T076 [US7] [Plan:9.1] Test organization/section/branch boundaries and search response performance in `backend/apps/search/tests/`.
 
 #### Step 9.2 — In-app alerts
 - **Requirements:** REQ-027
@@ -326,9 +326,9 @@ Tasks:
 
 Tasks:
 
-- [ ] T077 [US7] [Plan:9.2] Implement in-app notification generation, recipient scope, and read state in `backend/apps/notifications/`.
-- [ ] T078 [US7] [Plan:9.2] Build notification list, unread indicator, and authorized record links in `frontend/src/features/notifications/`.
-- [ ] T079 [US7] [Plan:9.2] Test alert generation, permission-scoped record links, unread state, and due-date boundaries in `backend/apps/notifications/tests/`.
+- [x] T077 [US7] [Plan:9.2] Implement in-app notification generation, recipient scope, and read state in `backend/apps/notifications/`.
+- [x] T078 [US7] [Plan:9.2] Build notification list, unread indicator, and authorized record links in `frontend/src/features/notifications/`.
+- [x] T079 [US7] [Plan:9.2] Test alert generation, permission-scoped record links, unread state, and due-date boundaries in `backend/apps/notifications/tests/`.
 
 #### Step 9.3 — Deferred: consent-aware customer messaging (post-MVP)
 - **Requirements:** REQ-030 (Later)
@@ -350,11 +350,11 @@ Tasks:
 
 Tasks:
 
-- [ ] T083 [Cross-cutting] [Plan:10.1] Configure production TLS, security headers, secret management, monitoring, and backup retention in `deploy/`.
-- [ ] T084 [Cross-cutting] [Plan:10.1] Add backup restore procedure, restore verification, and operator runbook in `docs/operations/`.
-- [ ] T085 [Cross-cutting] [Plan:10.1] Execute responsive/accessibility, role-boundary, upload-security, and performance acceptance checks in `docs/acceptance/`.
-- [ ] T086 [Cross-cutting] [Plan:10.1] Prepare manual opening catalog/stock setup, reconciliation report, admin guide, and source handover notes in `backend/management/commands/` and `docs/`.
-- [ ] T087 [Cross-cutting] [Plan:10.1] Complete owner acceptance for tax, currency, inventory costing, deposit treatment, role matrix, receipt, and report calculations in `docs/acceptance/`.
+- [x] T083 [Cross-cutting] [Plan:10.1] Configure production TLS, security headers, secret management, monitoring, and backup retention in `deploy/`. Include the private uploads volume (`PRIVATE_MEDIA_ROOT`) in backups alongside the database. *(Done: `deploy/` has Caddy HTTPS + headers, gunicorn, nightly checksummed backups with retention, `/api/v1/health/ready/`, request-ID logs, admin error emails. Verified on a local production-stack trial.)*
+- [x] T084 [Cross-cutting] [Plan:10.1] Add backup restore procedure, restore verification, and operator runbook in `docs/operations/`. *(Done: `docs/operations/runbook.md`, `deploy/backup/restore.sh`, `manage.py verify_integrity`. Restore drill passed on the trial stack.)*
+- [ ] T085 [Cross-cutting] [Plan:10.1] Execute responsive/accessibility, role-boundary, upload-security, and performance acceptance checks in `docs/acceptance/`. *(Partly done: `docs/acceptance/acceptance-checklist.md`. Automated and trial checks pass; real-phone, screen-reader and volume tests remain before go-live.)*
+- [x] T086 [Cross-cutting] [Plan:10.1] Prepare manual opening catalog/stock setup, reconciliation report, admin guide, and source handover notes in `backend/management/commands/` and `docs/`. *(Done: `manage.py import_catalog` with `docs/onboarding/catalog-template.csv`, `docs/onboarding/admin-guide.md`.)*
+- [ ] T087 [Cross-cutting] [Plan:10.1] Complete owner acceptance for tax, currency, inventory costing, deposit treatment, role matrix, receipt, and report calculations in `docs/acceptance/`. *(Prepared: `docs/acceptance/owner-signoff.md`, awaiting owner/accountant decisions.)*
 
 #### Step 10.2 — Deferred offline capability
 - **Requirements:** REQ-036
@@ -363,7 +363,24 @@ Tasks:
 
 Tasks:
 
-- [ ] T088 [Cross-cutting] [Plan:10.2] Record offline transaction entry as a deferred roadmap item requiring conflict resolution, reconciliation, and security design in `docs/roadmap.md`.
+- [x] T088 [Cross-cutting] [Plan:10.2] Record offline transaction entry as a deferred roadmap item requiring conflict resolution, reconciliation, and security design in `docs/roadmap.md`. *(Done: `docs/roadmap.md`.)*
+
+### Phase 11 — Public customer website (required)
+
+#### Step 11.1 — Public storefront, booking requests, and order tracking
+- **Requirements:** REQ-039 (Later); online payment additionally depends on REQ-038 / Step 6.4
+- **Design inputs:** [PRD later scope](./prd.md), Phase 7 department orders, Phase 10 security baseline
+- **Description:** Required (confirmed by the owner, 2026-11-24). A separate, unauthenticated public site under its own route/domain and read-only API namespace (`/api/public/v1/`). It exposes only records staff explicitly publish, never costs, balances, staff, or other customers' data. Booking requests land as *unconfirmed* orders that staff accept or decline; they never post sales or move stock on their own.
+
+Tasks:
+
+- [x] T089 [Plan:11.1] Add public-visibility flags and public descriptions/images for products and service packages, with a staff "Publish to website" control, in `backend/apps/catalog/` and `frontend/src/features/catalog/`. *(Done: `Product.show_online` + `public_description`, "Show this on the website" in the product form, "On website" badge in the list.)*
+- [x] T090 [Plan:11.1] Build a separate public API namespace with allow-listed serializers, no session/CSRF coupling to the staff app, rate limiting, and caching in `backend/apps/public_site/`. *(Done: `/api/public/v1/` in `apps/public_site/api.py`: no authentication classes, allow-listed fields, per-visitor rate limits `public_read` 120/min, `public_request` 5/h, `public_track` 20/h; public product images only for published products.)*
+- [x] T091 [Plan:11.1] Build booking/quote request forms (photography, printing, custom clothing) that create unconfirmed department orders plus a staff review queue, with spam protection (rate limit + challenge) in `backend/apps/public_site/` and `frontend/src/features/orders/`. *(Done: booking/quote form → `WebsiteRequest` (REQ-0001…) with honeypot + signed form-time token; staff Website page queue with Create order (pre-filled order form, customer matched by phone or added), Call/WhatsApp and Decline; new requests raise an alert. A request never creates an order by itself.)*
+- [x] T092 [Plan:11.1] Add order-status lookup by order/receipt number plus phone-number second factor, showing status and amount due only, in `backend/apps/public_site/`. *(Done: order or receipt number + phone (last 7 digits must match); same "not found" message for any mismatch; shows status steps, due date, total, paid and balance only.)*
+- [x] T093 [Plan:11.1] Build the branded, mobile-first public site (home, services/prices, booking, track order, contact/location) as a separate Vite entry in `frontend/src/public/`. *(Done: `frontend/site/index.html` + `src/public/`, served at `/site/` (Caddy `handle /site*`); home, services, prices, booking, track order, contact, WhatsApp button; brand palette.)*
+- [x] T094 [Plan:11.1] Test data exposure (no cost/balance/PII leakage), enumeration resistance on order lookup, rate limits, and request-to-order acceptance in `backend/apps/public_site/tests/`. *(Done: `apps/public_site/tests/test_public_site.py`, 9 tests: exposure, disabled site, honeypot/fast/forged form, request and tracking rate limits, tracking mismatch, staff queue and permissions.)*
+- [ ] T095 [Plan:11.1] (Waits for a payment provider, Step 6.4.) After Step 6.4 ships, add optional online deposit/balance payment from the order-tracking page using provider payment intents.
 
 ## Project Structure
 
@@ -424,3 +441,4 @@ docs/
 | REQ-036 | Optional offline writes (deferred) | 10.2 | `docs/roadmap.md` |
 | REQ-037 | Concurrent LRD/USD transactions with separate subtotals and USD consolidation | 1.3, 6.3 | `backend/apps/currencies/`, `frontend/src/features/`, `backend/apps/reports/` |
 | REQ-038 | (Later) Provider-based mobile-money/card/bank collection | 1.3, 6.4 | `backend/apps/payments/providers/`, `backend/apps/payments/webhooks/`, `frontend/src/features/payments/` |
+| REQ-039 | Public customer website: storefront, booking requests, order tracking | 11.1 | `backend/apps/public_site/`, `frontend/src/public/` |

@@ -9,6 +9,7 @@ from apps.organizations.models import Organization
 
 class Attachment(models.Model):
     """Private file metadata; physical storage remains behind a private adapter."""
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name="attachments")
     storage_key = models.CharField(max_length=500, unique=True)

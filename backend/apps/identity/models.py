@@ -8,6 +8,7 @@ from apps.organizations.models import Branch, BusinessSection, Organization
 
 class AccessPermission(models.Model):
     """Application-level permission code; Django model permissions are not business grants."""
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     code = models.CharField(max_length=100, unique=True)
     description = models.CharField(max_length=200)

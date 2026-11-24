@@ -75,6 +75,7 @@ Admins can grant permissions by role and business section. Each user has an indi
 - Live mobile-money/card/bank checkout and automated email/SMS/WhatsApp delivery of receipts, reminders, and order updates.
 - Advanced accounting, tax integrations, payroll, loyalty, barcode scanning, advanced multi-currency consolidation, and native apps.
 - Advanced offline workflows, forecasting, configurable approval chains, or custom report designer.
+- Public customer website: product/price showcase, photography and printing booking requests, and order-status lookup by order/receipt number, with online payment only after REQ-038.
 
 ## 6. User scenarios and acceptance criteria
 
@@ -208,6 +209,7 @@ Each requirement is independently testable. Priorities: **MVP** means required f
 - **REQ-036 (Later):** The system MAY support transaction entry while offline after a separate design for conflict resolution and reconciliation is approved.
 - **REQ-037 (MVP):** Users MUST be able to choose LRD or USD separately for each eligible transaction, and transactions in both currencies MUST coexist in the same organization and reporting period. The system MUST preserve each original amount and approved FX snapshot, use USD as the reporting base, show original-currency subtotals separately, and convert consolidated totals to USD.
 - **REQ-038 (Later):** The system MUST support configured mobile-money and card/bank payment providers through server-created payment intents and authenticated provider callbacks; payment state MUST be idempotent, auditable, reconcilable, and remain pending until provider confirmation. MVP payments are recorded manually after being received outside the system.
+- **REQ-039 (Later):** The system MAY offer a public, unauthenticated customer website that shows staff-published products and prices, accepts photography/printing/custom-clothing booking requests into the department order queue for staff confirmation, and lets a customer check an order's status with its number plus a second factor (such as phone number). It MUST be served separately from the staff application, expose only data explicitly marked public, never reveal costs, balances, staff, or other customers' details, and be rate-limited and protected against spam.
 
 ## 8. Business rules and definitions
 

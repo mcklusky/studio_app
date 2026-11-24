@@ -1,0 +1,15 @@
+# Secret-scanning rules: gitleaks defaults, minus known placeholders that are not secrets.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Documented placeholders and test-only values"
+paths = [
+  '''deploy/\.env\.example''',
+  '''backend/\.env\.example''',
+]
+regexes = [
+  '''local-dev-change-me''',
+  '''local-only-change-me''',
+  '''correct-horse-battery-1''',
+]

@@ -1,0 +1,62 @@
+# SITE_ADDRESS is the public domain (e.g. app.justsmileempire.com). Caddy obtains and renews
+# the HTTPS certificate automatically. For a local trial use "localhost" (self-signed).
+{$SITE_ADDRESS} {
+	encode zstd gzip
+
+	header {
+		Strict-Transport-Security "max-age={$HSTS_SECONDS:3600}"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "same-origin"
+		Permissions-Policy "geolocation=(), microphone=(), payment=(), usb=()"
+		Content-Security-Policy "default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+		-Server
+	}
+
+	request_body {
+		max_size 12MB
+	}
+
+	@backend path /api/* /{$DJANGO_ADMIN_PATH:admin}/*
+	handle @backend {
+		reverse_proxy backend:8000 {
+			header_up X-Forwarded-Proto {scheme}
+		}
+	}
+
+	handle_path /static/* {
+		root * /srv/static
+		header Cache-Control "public, max-age=86400"
+		file_server
+	}
+
+	# Installable app: the service worker and manifests must never be cached for long.
+	@appshell path /sw.js /manifest.webmanifest /site/manifest.webmanifest
+	header @appshell Cache-Control "no-cache"
+
+	handle /assets/* {
+		root * /srv/app
+		header Cache-Control "public, max-age=31536000, immutable"
+		file_server
+	}
+
+	# Public customer website (separate page; it only calls /api/public/v1/).
+	handle /site* {
+		root * /srv/app
+		try_files {path} /site/index.html
+		header /site/index.html Cache-Control "no-cache"
+		file_server
+	}
+
+	handle {
+		root * /srv/app
+		try_files {path} /index.html
+		header /index.html Cache-Control "no-cache"
+		file_server
+	}
+
+	log {
+		output stdout
+		format console
+	}
+}
